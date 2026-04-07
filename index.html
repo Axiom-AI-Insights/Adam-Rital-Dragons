@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rital & Adam Dragons</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1E2D4F;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .gate {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 48px 40px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .gate-icon {
+    width: 64px;
+    height: 64px;
+    background: #C9A84C;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1E2D4F;
+    margin-bottom: 24px;
+  }
+  .gate h1 { font-size: 24px; font-weight: 700; color: #1E2D4F; margin-bottom: 8px; letter-spacing: -0.3px; }
+  .gate p { font-size: 15px; color: #5A6A7E; margin-bottom: 32px; line-height: 1.6; }
+  .input-group { position: relative; margin-bottom: 16px; }
+  .input-group input { width: 100%; padding: 16px 20px; border: 2px solid #E8ECF2; border-radius: 12px; font-size: 16px; font-family: inherit; color: #2C3E50; outline: none; transition: border-color 0.2s ease; }
+  .input-group input:focus { border-color: #C9A84C; }
+  .input-group input::placeholder { color: #8896AA; }
+  .btn { width: 100%; padding: 16px; background: #1E2D4F; color: #FFFFFF; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+  .btn:hover { background: #2A3D66; }
+  .error { color: #C0392B; font-size: 14px; margin-top: 12px; display: none; }
+  .footer-text { margin-top: 32px; font-size: 12px; color: #8896AA; }
+  .footer-text span { color: #C9A84C; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="gate">
+  <div class="gate-icon">A</div>
+  <h1>Rital & Adam Dragons</h1>
+  <p>This document has been prepared for you. Enter the password to view.</p>
+  <form onsubmit="return checkAccess()">
+    <div class="input-group">
+      <input type="password" id="pwd" placeholder="Enter password" autocomplete="off" autofocus>
+    </div>
+    <button type="submit" class="btn">View Document</button>
+  </form>
+  <div class="error" id="err">That's not quite right. Try again.</div>
+  <div class="footer-text">Prepared by <span>Axiom AI Insights</span></div>
+</div>
+<script>
+  async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  async function checkAccess() {
+    const input = document.getElementById('pwd').value;
+    const hash = await hashPassword(input);
+    if (hash === 'ccfe58884196b3cc53030e63b772e84e3822ad9897c4c18ae56bce0f5d3048e6') {
+      sessionStorage.setItem('dragons_access', 'granted');
+      window.location.href = 'proposal.html';
+    } else {
+      document.getElementById('err').style.display = 'block';
+      document.getElementById('pwd').value = '';
+      document.getElementById('pwd').focus();
+    }
+    return false;
+  }
+</script>
+</body>
+</html>
