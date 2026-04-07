@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rital & Adam Dragons - Initial View</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1E2D4F;
+    --navy-light: #2A3D66;
+    --navy-dark: #151F38;
+    --gold: #C9A84C;
+    --gold-light: #D4BA6A;
+    --gold-dark: #A88A3A;
+    --white: #FFFFFF;
+    --off-white: #F8F9FC;
+    --light-grey: #E8ECF2;
+    --mid-grey: #8896AA;
+    --text: #2C3E50;
+    --text-light: #5A6A7E;
+    --success: #27AE60;
+    --warning: #E67E22;
+    --info: #3498DB;
+    --danger: #C0392B;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+    padding: 40px 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(30, 45, 79, 0.3);
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gold);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .brand-text h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--white);
+  }
+
+  .brand-text p {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .header-badge {
+    background: rgba(201, 168, 76, 0.15);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    color: var(--gold-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* TABS */
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .tab-btn:hover {
+    color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    background: rgba(201, 168, 76, 0.08);
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 30px 60px;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TYPOGRAPHY */
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy-light);
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  p { margin-bottom: 16px; }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid var(--light-grey);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(30, 45, 79, 0.08);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .card-icon.gold { background: rgba(201, 168, 76, 0.12); }
+  .card-icon.blue { background: rgba(52, 152, 219, 0.12); }
+  .card-icon.green { background: rgba(39, 174, 96, 0.12); }
+  .card-icon.orange { background: rgba(230, 126, 34, 0.12); }
+  .card-icon.navy { background: rgba(30, 45, 79, 0.1); }
+  .card-icon.red { background: rgba(192, 57, 43, 0.1); }
+
+  .card-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--mid-grey);
+  }
+
+  /* STAT BOXES */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-box {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--light-grey);
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+
+  .stat-number.gold { color: var(--gold-dark); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* PROCESS FLOW */
+  .process-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 32px 0;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 32px;
+  }
+
+  .process-step:last-child { padding-bottom: 0; }
+
+  .process-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 56px;
+  }
+
+  .process-number {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .process-line {
+    width: 2px;
+    flex: 1;
+    background: var(--light-grey);
+    min-height: 20px;
+    margin-top: 8px;
+  }
+
+  .process-step:last-child .process-line { display: none; }
+
+  .process-content {
+    flex: 1;
+    padding-top: 12px;
+  }
+
+  .process-content h4 {
+    margin-top: 0;
+    font-size: 18px;
+    color: var(--navy);
+  }
+
+  .process-content p {
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  /* SCENARIO CARDS */
+  .scenario {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 24px 0;
+    color: var(--white);
+  }
+
+  .scenario-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .scenario h4 {
+    color: var(--white);
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .scenario p {
+    color: rgba(255,255,255,0.8);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .scenario .solution-tag {
+    display: inline-block;
+    background: rgba(201, 168, 76, 0.2);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    color: var(--gold-light);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 8px;
+    margin-right: 6px;
+  }
+
+  /* REVENUE GRID */
+  .revenue-category {
+    margin-bottom: 32px;
+  }
+
+  .revenue-category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--light-grey);
+  }
+
+  .revenue-category-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--navy);
+  }
+
+  .revenue-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  .revenue-item:last-child { border-bottom: none; }
+
+  .revenue-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(30, 45, 79, 0.08);
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .revenue-detail h5 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+
+  .revenue-detail p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .phase-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .phase-1 { background: rgba(39, 174, 96, 0.12); color: #1E8449; }
+  .phase-2 { background: rgba(52, 152, 219, 0.12); color: #2471A3; }
+  .phase-3 { background: rgba(230, 126, 34, 0.12); color: #CA6F1E; }
+
+  /* AI FEATURE CARDS */
+  .ai-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--gold);
+    border-right: 1px solid var(--light-grey);
+    border-top: 1px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  .ai-card h4 {
+    margin-top: 0;
+    color: var(--navy);
+  }
+
+  .ai-how {
+    background: var(--off-white);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-light);
+    border: 1px solid var(--light-grey);
+  }
+
+  .ai-how strong { color: var(--navy); }
+
+  /* QUESTION CARDS */
+  .question-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--light-grey);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .question-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 2px 12px rgba(201, 168, 76, 0.1);
+  }
+
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .question-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--navy);
+  }
+
+  .question-toggle {
+    font-size: 20px;
+    color: var(--gold);
+    font-weight: 300;
+    transition: transform 0.2s ease;
+  }
+
+  .question-card.open .question-toggle {
+    transform: rotate(45deg);
+  }
+
+  .question-body {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--light-grey);
+  }
+
+  .question-card.open .question-body { display: block; }
+
+  .question-body p {
+    font-size: 15px;
+    color: var(--text-light);
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .highlight p { margin-bottom: 8px; color: var(--text); }
+  .highlight p:last-child { margin-bottom: 0; }
+
+  .highlight strong { color: var(--navy); }
+
+  /* COMPLIANCE NOTE */
+  .compliance-note {
+    background: rgba(192, 57, 43, 0.05);
+    border: 1px solid rgba(192, 57, 43, 0.15);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .compliance-note strong { color: var(--danger); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 40px 30px;
+    color: var(--mid-grey);
+    font-size: 12px;
+    border-top: 1px solid var(--light-grey);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-brand {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .header-top { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .tab-btn { padding: 10px 14px; font-size: 12px; }
+    h2 { font-size: 24px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .process-step { gap: 16px; }
+    .main { padding: 24px 20px 40px; }
+  }
+
+  /* INTRO WELCOME */
+  .welcome-box {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    border-radius: 16px;
+    padding: 40px;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .welcome-box h2 { color: var(--white); margin-bottom: 16px; }
+
+  .welcome-box p {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .welcome-box .gold-text { color: var(--gold); font-weight: 600; }
+
+  .doc-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .doc-map-item {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .doc-map-item .map-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .doc-map-item h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .doc-map-item p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* NETWORK DIAGRAM */
+  .network-hub {
+    text-align: center;
+    margin: 32px 0;
+  }
+
+  .hub-center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+    box-shadow: 0 8px 30px rgba(30, 45, 79, 0.25);
+    margin-bottom: 24px;
+  }
+
+  .network-spokes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .spoke {
+    background: var(--white);
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    transition: all 0.2s ease;
+  }
+
+  .spoke:hover {
+    border-color: var(--gold);
+    box-shadow: 0 2px 8px rgba(201, 168, 76, 0.15);
+  }
+
+  .spoke-icon { font-size: 24px; margin-bottom: 6px; }
+
+  .spoke-label { font-size: 12px; color: var(--text-light); font-weight: 400; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-content">
+    <div class="header-top">
+      <div class="brand">
+        <div class="brand-icon">A</div>
+        <div class="brand-text">
+          <h1>Rital & Adam Dragons</h1>
+          <p>Prepared by Axiom AI Insights</p>
+        </div>
+      </div>
+      <div class="header-badge">Discussion Document - April 2026</div>
+    </div>
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="welcome">Welcome</button>
+      <button class="tab-btn" data-tab="opportunity">The Opportunity</button>
+      <button class="tab-btn" data-tab="concept">The Concept</button>
+      <button class="tab-btn" data-tab="process">How It Works</button>
+      <button class="tab-btn" data-tab="ai">AI in Action</button>
+      <button class="tab-btn" data-tab="revenue">Revenue Streams</button>
+      <button class="tab-btn" data-tab="questions">Key Questions</button>
+      <button class="tab-btn" data-tab="sources">Sources</button>
+    </nav>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- TAB: WELCOME -->
+  <div id="welcome" class="tab-content active">
+    <div class="welcome-box">
+      <h2>Rital, welcome.</h2>
+      <p>After our conversation, I went away and put some structure around the idea. This document is the result. It's not a finished business plan or a polished pitch deck. It's an <span class="gold-text">initial view</span> - an honest look at the opportunity, how the business could work and where AI fits in to make it genuinely different from anything else out there.</p>
+      <p>I've researched the market, mapped out a potential process and identified the revenue opportunities. Some of this will be spot on, some of it we'll want to change, and some of it will probably spark ideas neither of us have had yet. That's the point.</p>
+      <p>Everything in here is <span class="gold-text">a starting point for discussion on Friday</span>, not a set of final decisions. I've flagged the key questions we need to work through together. Some of these I have a view on, some I need your input. That's the whole point of meeting.</p>
+
+      <div class="doc-map">
+        <div class="doc-map-item">
+          <div class="map-icon">1</div>
+          <div>
+            <h5>The Opportunity</h5>
+            <p>What's happening in the market right now and why the timing is right</p>
+          </div>
+        </div>
+        <div class="doc-map-item">
+          <div class="map-icon">2</div>
+          <div>
+            <h5>The Concept</h5>
+            <p>What this business actually does and who it serves</p>
+          </div>
+        </div>
+        <div class="doc-map-item">
+          <div class="map-icon">3</div>
+          <div>
+            <h5>How It Works</h5>
+            <p>The end-to-end process from first contact to ongoing support</p>
+          </div>
+        </div>
+        <div class="doc-map-item">
+          <div class="map-icon">4</div>
+          <div>
+            <h5>AI in Action</h5>
+            <p>Specific ways AI powers the operation - including your sourcing ideas</p>
+          </div>
+        </div>
+        <div class="doc-map-item">
+          <div class="map-icon">5</div>
+          <div>
+            <h5>Revenue Streams</h5>
+            <p>Every way this business could make money, phased by priority</p>
+          </div>
+        </div>
+        <div class="doc-map-item">
+          <div class="map-icon">6</div>
+          <div>
+            <h5>Key Questions</h5>
+            <p>What we need to discuss and decide on Friday</p>
+          </div>
+        </div>
+        <div class="doc-map-item">
+          <div class="map-icon">7</div>
+          <div>
+            <h5>Sources</h5>
+            <p>Where the market data and statistics come from</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon gold">&#9733;</div>
+        <div>
+          <div class="card-title">How to use this document</div>
+        </div>
+      </div>
+      <p>Click through the tabs at the top to explore each section. There's no rush - read it at your own pace before Friday. The <strong>Key Questions</strong> tab at the end is the agenda for our conversation. If anything sparks a thought or a question as you're reading, make a note of it - that's exactly what this is designed to do.</p>
+      <p>This whole document was put together using AI tools to do the market research, data analysis and formatting. That's relevant because the same kind of capability is central to how this business would actually operate day-to-day.</p>
+    </div>
+  </div>
+
+  <!-- TAB: THE OPPORTUNITY -->
+  <div id="opportunity" class="tab-content">
+    <h2>The Opportunity</h2>
+    <p class="section-subtitle">The UK property investment market is going through a structural shift. The old ways of doing things are breaking down and a gap is opening up that nobody is filling properly.</p>
+
+    <h3>Landlords are leaving - fast</h3>
+    <p>The numbers tell a clear story. Regulatory pressure, rising costs and tax changes are pushing landlords - especially smaller, traditional ones - towards the exit.</p>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number">93,000</div>
+        <div class="stat-label">Buy-to-let landlords left the sector in 2025</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">110,000</div>
+        <div class="stat-label">Additional landlords forecast to exit in 2026</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number gold">1 May 2026</div>
+        <div class="stat-label">Section 21 (no-fault eviction) abolished</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number gold">Oct 2030</div>
+        <div class="stat-label">All rentals must reach EPC Band C</div>
+      </div>
+    </div>
+
+    <h3>What's driving this?</h3>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon orange">&#9888;</div>
+        <div>
+          <div class="card-label">Regulation</div>
+          <div class="card-title">Section 21 abolition changes everything</div>
+        </div>
+      </div>
+      <p>From 1 May 2026, landlords can no longer serve no-fault evictions. This removes a key tool for managing problem tenancies AND for gaining vacant possession to carry out EPC improvements. A landlord who needs their property empty to retrofit it to Band C now has a much harder path to get there. For many smaller landlords, this is the tipping point.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon red">&#163;</div>
+        <div>
+          <div class="card-label">Costs</div>
+          <div class="card-title">EPC upgrades cost serious money</div>
+        </div>
+      </div>
+      <p>Retrofitting an older property to EPC Band C typically costs between &pound;10,000 and &pound;20,000+. For a landlord with two or three properties and mortgage rates that have doubled since 2021, that's a bill they may simply not be able to pay. The deadline is 2030, but the financial pressure is already here.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon red">&#128200;</div>
+        <div>
+          <div class="card-label">Tax</div>
+          <div class="card-title">Tax increases from April 2027</div>
+        </div>
+      </div>
+      <p>Property income tax rates are set to rise by 2 percentage points above other income from April 2027. Combined with Making Tax Digital requirements (quarterly digital filing from April 2026 for landlords earning &pound;50k+), the administrative and financial burden is increasing. 2.4 million landlords are affected.</p>
+    </div>
+
+    <h3>The niche nobody is serving</h3>
+
+    <div class="highlight">
+      <p><strong>There's a specific group of landlords who are being left behind.</strong></p>
+      <p>Distressed, traditional and old money landlords who bought their properties years ago and have been managing them the same way ever since. They don't know about modern strategies like Rent to Rent, Purchase Lease Options, serviced accommodation or HMO conversions. They hear about EPC deadlines and Section 21 changes and their instinct is to sell up because they don't know there are alternatives.</p>
+      <p><strong>This group has assets and money. What they lack is knowledge and options.</strong> That's exactly where this business sits.</p>
+    </div>
+
+    <h3>The education gap</h3>
+    <p>On the other side, there are thousands of aspiring property investors who've been through training courses - Wealth Dragons, Property Investor Network, Touchstone Education, Property CEO and others. These courses teach the theory: how to find deals, how to structure investments, how property strategies work.</p>
+    <p>But then the training ends and graduates are left to figure out the actual doing on their own. No deal pipeline, no analysis tools, no support network, no hand-holding through their first purchase. The education-to-execution gap is where most people get stuck, lose confidence or never take the first step.</p>
+
+    <div class="highlight">
+      <p><strong>The opportunity in a sentence:</strong> traditional landlords who have properties but lack knowledge, and trained investors who have knowledge but lack properties. Nobody is joining them up properly.</p>
+    </div>
+
+    <h3>Platforms exist, but they're incomplete</h3>
+    <p>There are established players doing parts of this well. SiteFindr (since 2012) runs a marketplace connecting deal sourcers with investors - deals sell within 48-72 hours and they charge &pound;5k+VAT per deal. PropertyData, PropertyEngine and Realyse provide data and analysis tools. PropMarker uses AI to scan listings automatically.</p>
+    <p>But these are all point solutions. A sourcer uses one tool to find deals, another to analyse them, then sources their own finance, negotiates independently and manages the property themselves. Nobody provides the full picture - the single front door where you bring a property situation and get guided to the right outcome with the right people.</p>
+  </div>
+
+  <!-- TAB: THE CONCEPT -->
+  <div id="concept" class="tab-content">
+    <h2>The Concept</h2>
+    <p class="section-subtitle">A property solutions network that helps people do something smart with what they have - and connects them to the right people to make it happen.</p>
+
+    <div class="welcome-box" style="margin-bottom: 32px;">
+      <h2 style="font-size: 22px;">"Bring us your property issue."</h2>
+      <p>That's the proposition. Whether you're a landlord drowning in regulation, an investor looking for your first deal, or a family dealing with an inherited property - you come to us, we diagnose the situation, show you the options and connect you with trusted people who can execute.</p>
+    </div>
+
+    <h3>Who this business serves</h3>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon gold">&#127968;</div>
+        <div>
+          <div class="card-label">Primary audience</div>
+          <div class="card-title">Traditional landlords who need options, not pressure</div>
+        </div>
+      </div>
+      <p>Landlords who've owned properties for years, maybe decades. They've been managing the same way they always have and suddenly the world has changed around them. EPC deadlines, Section 21 changes, tax increases, Making Tax Digital. They're overwhelmed and their instinct is to sell because nobody has shown them the alternatives.</p>
+      <p>We don't pressure them to sell. We don't push a single solution. We assess their situation, explain the options in plain English and let them decide. Maybe they convert to serviced accommodation. Maybe they lease to a social housing provider. Maybe a Rent to Rent arrangement makes sense. Maybe selling IS the right call, but to the right buyer at the right price. The point is they get proper advice, not just an offer.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon blue">&#128176;</div>
+        <div>
+          <div class="card-label">Secondary audience</div>
+          <div class="card-title">Investors looking for quality deal flow</div>
+        </div>
+      </div>
+      <p>Aspiring and active investors who want access to vetted, analysed deals with proper due diligence already done. Many have been through training courses and know the theory but struggle with the practical execution - finding genuine BMV deals, assessing refurbishment costs accurately, navigating regulatory compliance. We give them a pipeline of quality opportunities and the network to execute.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#129309;</div>
+        <div>
+          <div class="card-label">Tertiary audience</div>
+          <div class="card-title">Families dealing with probate and inherited property</div>
+        </div>
+      </div>
+      <p>When a property owner passes away, the family often inherits assets they don't know what to do with. They want a clean, fair exit without feeling taken advantage of during a difficult time. We provide honest, structured guidance and connect them with the right professionals to handle the process with care.</p>
+    </div>
+
+    <h3>How this is different</h3>
+
+    <div class="highlight">
+      <p><strong>Training companies</strong> (Wealth Dragons, PIN, Touchstone, Property CEO) teach the theory. We help people actually do it.</p>
+      <p><strong>Deal sourcing platforms</strong> (SiteFindr, PropSourcer) match sourced deals with investors. We diagnose the whole situation and offer multiple pathways, not just a single transaction.</p>
+      <p><strong>Data platforms</strong> (PropertyData, PropertyEngine, Realyse) provide tools for professionals. We use those tools behind the scenes so the client gets the insight without needing to learn the software.</p>
+      <p><strong>This business</strong> is the advisory and network layer that sits above all of them. Think of it as the GP surgery of property - you bring the symptom, we diagnose and refer you to the right specialist.</p>
+    </div>
+
+    <h3>The network is the business</h3>
+    <p>The real power isn't in any single service - it's in the network of trusted contacts that surrounds the business. Every client interaction flows through the network, and every connection strengthens it.</p>
+
+    <div class="network-hub">
+      <div class="hub-center">Rital & Adam<br>Dragons</div>
+      <div class="network-spokes">
+        <div class="spoke">
+          <div class="spoke-icon">&#127968;</div>
+          <div>SA Management</div>
+          <div class="spoke-label">Rital's existing company</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#128101;</div>
+          <div>Social Housing</div>
+          <div class="spoke-label">Long-term lease contracts</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#128176;</div>
+          <div>Investors</div>
+          <div class="spoke-label">Cash buyers and fund raisers</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#9878;</div>
+          <div>Solicitors</div>
+          <div class="spoke-label">Conveyancing and legal</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#128200;</div>
+          <div>Mortgage Brokers</div>
+          <div class="spoke-label">Finance and lending</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#128736;</div>
+          <div>Contractors</div>
+          <div class="spoke-label">Refurb and maintenance</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#128269;</div>
+          <div>Surveyors</div>
+          <div class="spoke-label">Valuations and inspections</div>
+        </div>
+        <div class="spoke">
+          <div class="spoke-icon">&#127891;</div>
+          <div>Training Partners</div>
+          <div class="spoke-label">Referrals from course graduates</div>
+        </div>
+      </div>
+    </div>
+
+    <p>This network starts small and grows with every deal. Rital already has the serviced accommodation operation. Adam has connections to social housing providers and property investors. The network builds as we bring in vetted, trusted partners in each category. Over time, the network itself becomes the competitive advantage - the thing that can't be replicated overnight.</p>
+  </div>
+
+  <!-- TAB: HOW IT WORKS -->
+  <div id="process" class="tab-content">
+    <h2>How It Works</h2>
+    <p class="section-subtitle">Five steps from first contact to ongoing relationship. Every client gets a structured process, not a sales pitch.</p>
+
+    <div class="process-flow">
+      <div class="process-step">
+        <div class="process-marker">
+          <div class="process-number">1</div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <h4>Diagnose</h4>
+          <p>Understand the client's situation. What do they have? What do they want? What are their constraints? This isn't a quick form - it's a proper assessment. A landlord with three terraced houses and no EPC compliance is a completely different situation to a first-time investor with &pound;50k cash looking for a BMV deal. The diagnosis determines everything that follows.</p>
+          <p><strong>AI role:</strong> Automated portfolio analysis, regulatory compliance checking, market valuation, yield calculations - all done before the first conversation so we arrive with data, not just questions.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-marker">
+          <div class="process-number">2</div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <h4>Advise</h4>
+          <p>Present the options clearly. Not one recommendation - a range of paths with honest trade-offs. "You could sell, and here's what you'd likely get. You could convert to serviced accommodation, and here's the yield. You could lease to a social housing provider, and here's the guaranteed income. You could Rent to Rent. Here are the costs, timelines and risks of each."</p>
+          <p><strong>AI role:</strong> Generate scenario comparisons, financial projections and regulatory impact assessments for each option. What used to take a consultant a week takes minutes.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-marker">
+          <div class="process-number">3</div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <h4>Connect</h4>
+          <p>Once the client chooses a path, connect them to the right people in the network. Selling? Here's a vetted investor who buys in that area. Converting to SA? Here's Rital's management company. Need finance? Here's a broker who specialises in this. Need a solicitor? Here's one we've worked with 20 times.</p>
+          <p><strong>AI role:</strong> Intelligent matching - which investor's buy criteria match this deal? Which broker has the best rates for this property type? The matching gets smarter with every transaction.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-marker">
+          <div class="process-number">4</div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <h4>Execute</h4>
+          <p>Manage the process through to completion. Coordinate the solicitors, surveyors, brokers and contractors. Chase progress, flag delays and keep everyone on track. The client doesn't have to project-manage their own transaction - we handle that.</p>
+          <p><strong>AI role:</strong> Automated progress tracking, document generation, timeline management, compliance checklists. Every transaction follows a structured workflow.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-marker">
+          <div class="process-number">5</div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <h4>Support</h4>
+          <p>The relationship doesn't end at completion. Ongoing portfolio monitoring, regulatory alerts, market updates and periodic reviews. A landlord who converted one property to SA might want to do the same with another. An investor who bought their first deal will want their second. This is where one-off transactions become long-term relationships.</p>
+          <p><strong>AI role:</strong> Portfolio analytics, compliance monitoring, market intelligence alerts, maintenance prediction. Proactive, not reactive.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>What this looks like in practice</h3>
+
+    <div class="scenario">
+      <div class="scenario-label">Worked example 1</div>
+      <h4>"I'm a landlord with 4 properties. I can't afford the EPC upgrades and I don't want to sell. What do I do?"</h4>
+      <p>We assess the portfolio. Two properties are already close to Band C - minor upgrades, maybe &pound;3k each. One is suitable for serviced accommodation conversion - higher yield than standard letting, and Rital's company can manage it. The fourth makes most sense to lease to a social housing provider on a long-term contract - guaranteed rent, tenant managed by the provider, landlord keeps the asset.</p>
+      <p>Result: the landlord keeps all four properties, meets compliance requirements and actually increases their income. They didn't need to sell - they needed someone to show them the options.</p>
+      <div>
+        <span class="solution-tag">EPC Strategy</span>
+        <span class="solution-tag">SA Conversion</span>
+        <span class="solution-tag">Social Housing Lease</span>
+        <span class="solution-tag">Portfolio Retained</span>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-label">Worked example 2</div>
+      <h4>"I did a property investment course last year. I've got &pound;40k saved. I don't know where to start."</h4>
+      <p>We assess their goals, risk appetite and timeline. AI scans our deal pipeline and flags three properties that match: a BMV two-bed in Manchester (25% below market, needs light refurb), a ready-to-let flat in Leeds (immediate rental income) and an HMO opportunity in Nottingham (higher yield, more management). We present the analysis, walk them through the numbers and connect them with our broker for finance and solicitor for conveyancing.</p>
+      <p>Result: the investor goes from "I did a course" to "I own an investment property" with support at every step.</p>
+      <div>
+        <span class="solution-tag">Deal Matching</span>
+        <span class="solution-tag">Due Diligence</span>
+        <span class="solution-tag">Finance Intro</span>
+        <span class="solution-tag">First Purchase</span>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-label">Worked example 3</div>
+      <h4>"My father passed away and left two rental properties. We don't know anything about property."</h4>
+      <p>We handle this with care and sensitivity. We assess the properties, explain what the family has inherited (current valuations, rental income, condition, compliance status) and present the options clearly: keep and manage (we can arrange management), sell to an investor at a fair price through our network, or convert the use. No pressure, no rushing, just honest guidance during a difficult time.</p>
+      <p>Result: the family makes an informed decision with professional support, without feeling exploited.</p>
+      <div>
+        <span class="solution-tag">Probate Support</span>
+        <span class="solution-tag">Portfolio Assessment</span>
+        <span class="solution-tag">Sensitive Handling</span>
+        <span class="solution-tag">Family's Choice</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: AI IN ACTION -->
+  <div id="ai" class="tab-content">
+    <h2>AI in Action</h2>
+    <p class="section-subtitle">This isn't AI for the sake of it. These are specific, practical ways artificial intelligence makes the business faster, smarter and more scalable than a traditional operation could ever be.</p>
+
+    <div class="highlight">
+      <p><strong>The honest truth about AI in 2026:</strong> most businesses that claim to "use AI" are using it for basic tasks - chatbots, email drafting, document summaries. What we're proposing is different. We're designing the business from the ground up with AI at the core of its operations. That means it can do in minutes what would take a traditional consultancy days, and it can scale without needing to hire a large team.</p>
+    </div>
+
+    <h3>Three AI-powered sourcing strategies</h3>
+    <p>These are the specific ideas Rital identified - each one represents a genuine competitive edge because they use publicly available data in ways that most property businesses simply aren't doing yet.</p>
+
+    <div class="ai-card">
+      <h4>1. Companies House - Distressed Business Intelligence</h4>
+      <p>Companies House data is public and accessible via API. AI can systematically scan for companies with property-related activity that are showing signs of financial distress - administration, liquidation proceedings, winding-up petitions, overdue filings. Cross-reference these with Land Registry data to identify which distressed companies actually own property.</p>
+      <div class="ai-how">
+        <strong>How it works in practice:</strong> The system runs daily scans, flagging newly distressed companies with property assets. Each flag comes with a data pack - company details, property titles, estimated values, nature of distress. Instead of manually trawling public records, we get a curated pipeline of potential BMV portfolio acquisitions delivered every morning.
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <h4>2. Probate Property Identification</h4>
+      <p>Probate records are publicly available through the Probate Registry. Land Registry titles are searchable. AI can cross-reference these datasets to identify properties where the owner has recently passed away - flagging potential probate properties before they ever reach the open market.</p>
+      <div class="ai-how">
+        <strong>How it works in practice:</strong> The system identifies matches and generates an outreach package - a sensitively worded letter explaining what we do and how we can help the family. The tone is critical: this is about offering support during a difficult time, not about profit. Every communication is reviewed before sending. The approach only works if it's done with genuine care and respect.
+      </div>
+      <div class="compliance-note">
+        <strong>Important note:</strong> This strategy requires careful legal review around data protection (GDPR) and the ethical handling of bereavement communications. We recommend taking proper legal advice before implementing this and establishing a clear ethical framework for all outreach. Done right, this is a valuable service to families. Done wrong, it damages the brand irreparably.
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <h4>3. Investor and Private Finance Matching</h4>
+      <p>Finding investors with capital to deploy and matching them with appropriate deals. AI can profile investor preferences (location, price range, strategy, risk appetite) and automatically match them to new opportunities as they come through the pipeline.</p>
+      <div class="ai-how">
+        <strong>How it works in practice:</strong> An investor registers their criteria. When a deal comes in that matches, they get an alert with a full analysis pack - valuation, comparable sales, yield projections, refurb estimates, regulatory compliance status. The matching gets smarter over time as the system learns which deals each investor actually proceeds with.
+      </div>
+      <div class="compliance-note">
+        <strong>Important note:</strong> Depending on how the investor matching and private finance raising is structured, this may require FCA authorisation. The plan is to build this properly from day one - working with FCA-approved individuals and ensuring full compliance. Over time, the business becomes a fully authorised service. This is a trust and compliance-first operation, always.
+      </div>
+    </div>
+
+    <h3>AI across the whole operation</h3>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon gold">&#128202;</div>
+        <div>
+          <div class="card-title">Instant Deal Analysis</div>
+        </div>
+      </div>
+      <p>Every property that enters the pipeline gets an automated analysis: AI-powered valuation against comparable sales, rental yield calculation, refurbishment cost estimation, EPC compliance assessment and regulatory check (licensing requirements, Article 4 restrictions, local authority rules). What takes a human analyst 3-4 hours takes the system under 2 minutes.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon blue">&#128196;</div>
+        <div>
+          <div class="card-title">Scenario Modelling</div>
+        </div>
+      </div>
+      <p>When advising a landlord on their options, AI generates comparative scenarios instantly. "If you sell, here's the estimated net proceeds. If you convert to SA, here's the projected yield over 3 years. If you lease to social housing, here's the guaranteed income." Each scenario includes costs, timelines, risks and assumptions - presented clearly so the client can make an informed decision.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#128203;</div>
+        <div>
+          <div class="card-title">Regulatory Compliance Engine</div>
+        </div>
+      </div>
+      <p>The regulatory landscape is getting more complex every year. AI tracks all relevant changes (EPC deadlines, Section 21 rules, tax changes, licensing requirements by local authority, Article 4 directions) and automatically flags compliance issues for every property in the pipeline. No landlord or investor gets caught out by a regulation they didn't know about.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon orange">&#128172;</div>
+        <div>
+          <div class="card-title">Client Communication and Reporting</div>
+        </div>
+      </div>
+      <p>Professional property reports, portfolio assessments, option comparisons, progress updates and market intelligence - all generated automatically and branded to the business. The quality of documentation that would normally require a team of analysts, produced at scale with a lean operation.</p>
+    </div>
+
+    <div class="highlight">
+      <p><strong>The bottom line on AI:</strong> it doesn't replace the human relationships that make property deals happen. What it does is handle the research, analysis, compliance checking and documentation at a speed and scale that lets a small team operate like a much bigger one. The people do the relationships. The AI does the heavy lifting behind the scenes.</p>
+    </div>
+  </div>
+
+  <!-- TAB: REVENUE STREAMS -->
+  <div id="revenue" class="tab-content">
+    <h2>Revenue Streams</h2>
+    <p class="section-subtitle">Every way this business could make money. Not all of these launch on day one - they're phased by complexity and priority. The key is that the business model has multiple income sources, not just one.</p>
+
+    <div class="stats-grid" style="margin-bottom: 32px;">
+      <div class="stat-box">
+        <div class="stat-number" style="font-size: 28px; color: #1E8449;">Phase 1</div>
+        <div class="stat-label">Launch - core services that generate revenue immediately</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" style="font-size: 28px; color: #2471A3;">Phase 2</div>
+        <div class="stat-label">Scale - add once the network and deal flow are established</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" style="font-size: 28px; color: #CA6F1E;">Phase 3</div>
+        <div class="stat-label">Expand - longer-term plays that need volume and reputation</div>
+      </div>
+    </div>
+
+    <!-- Transaction-Based -->
+    <div class="revenue-category">
+      <div class="revenue-category-header">
+        <h4>&#128178; Transaction-Based Revenue</h4>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">1</div>
+        <div class="revenue-detail">
+          <h5>Deal Sourcing Fees <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Charge investors for sourced and vetted BMV deals. Industry standard is 1-5% of purchase price or a fixed fee of &pound;2,000-&pound;6,000 per deal. SiteFindr charges &pound;5k+VAT on sub-&pound;250k deals for reference.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">2</div>
+        <div class="revenue-detail">
+          <h5>Network Referral Commissions <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Every time we introduce a client to a solicitor, mortgage broker, surveyor, contractor or insurance provider in the network, we earn a referral fee. This stacks up fast - a single property transaction typically involves 3-5 professional introductions.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">3</div>
+        <div class="revenue-detail">
+          <h5>Deal Packaging Fees <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Preparing a property for sale to investors - full analysis pack with valuation, comparables, yield projections, refurb estimates, compliance status. The AI makes this fast and cheap to produce, but the value to the buyer is significant.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">4</div>
+        <div class="revenue-detail">
+          <h5>Completion / Success Fees <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>A premium charged when a deal completes through the network. This aligns incentives - we only earn when the client gets a result.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">5</div>
+        <div class="revenue-detail">
+          <h5>Joint Venture Structuring <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Helping structure deals between parties - e.g. investor + landlord + developer. Fee for arranging and documenting the agreement. Requires legal framework.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">6</div>
+        <div class="revenue-detail">
+          <h5>Distressed Portfolio Acquisition <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Using the Companies House AI sourcing to identify distressed portfolios, negotiate BMV acquisition, then either retain, flip or package for investors. Higher risk but higher margin.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advisory-Based -->
+    <div class="revenue-category">
+      <div class="revenue-category-header">
+        <h4>&#128161; Advisory-Based Revenue</h4>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">7</div>
+        <div class="revenue-detail">
+          <h5>Property Strategy Consultancy <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>"I have three BTLs and I'm drowning - what do I do?" Paid diagnostic and options assessment. The core advisory service. Could be fixed-fee (&pound;500-&pound;2,000) depending on portfolio size and complexity.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">8</div>
+        <div class="revenue-detail">
+          <h5>Portfolio Health Checks <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Assess a landlord's portfolio against current and upcoming regulations (EPC status, Section 21 implications, tax impact, licensing). AI-powered analysis with human advice. Could be a lead-generation tool (free basic check, paid detailed report).</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">9</div>
+        <div class="revenue-detail">
+          <h5>Exit Strategy Planning <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Helping landlords structure their exit for maximum value. Sell individually or as a portfolio? Convert use first? Time the market? This is where the knowledge gap for traditional landlords is widest.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">10</div>
+        <div class="revenue-detail">
+          <h5>Investment Strategy Sessions <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Helping new investors define their buy criteria, strategy and first steps. Bridges the gap after training courses. Could partner with training companies as a "next step" referral.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">11</div>
+        <div class="revenue-detail">
+          <h5>Regulatory Compliance Advisory <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Specialist advice on EPC compliance pathways, licensing requirements, Making Tax Digital setup. Increasingly valuable as regulation complexity grows.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management & Ongoing -->
+    <div class="revenue-category">
+      <div class="revenue-category-header">
+        <h4>&#128260; Management & Ongoing Revenue</h4>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">12</div>
+        <div class="revenue-detail">
+          <h5>Serviced Accommodation Management <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Through Rital's existing SA management company. When a client's best option is SA conversion, the management is already in-house. This is a built-in revenue stream from day one with no new infrastructure needed.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">13</div>
+        <div class="revenue-detail">
+          <h5>Social Housing Leasing Introductions <span class="phase-badge phase-1">Phase 1</span></h5>
+          <p>Connecting landlords with social housing providers who want properties on long-term lease contracts. Guaranteed rent for the landlord, managed tenancy from the provider. Commission on the introduction.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">14</div>
+        <div class="revenue-detail">
+          <h5>Tenant Finding / Lettings Referrals <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Commission from letting agents for introducing landlords who need tenant finding or full management services.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">15</div>
+        <div class="revenue-detail">
+          <h5>Property Management Referrals <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>For landlords who want to keep their properties but don't want to manage them. Introduction to vetted management companies in the network.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recurring / Subscription -->
+    <div class="revenue-category">
+      <div class="revenue-category-header">
+        <h4>&#128197; Recurring / Subscription Revenue</h4>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">16</div>
+        <div class="revenue-detail">
+          <h5>Investor Membership <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Monthly subscription for access to deal flow, market intelligence and first-look at new opportunities. Tiered: basic alerts free, premium analysis and priority access paid.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">17</div>
+        <div class="revenue-detail">
+          <h5>Landlord Portfolio Monitoring <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Ongoing subscription for compliance monitoring, regulatory alerts and portfolio analytics. AI-powered dashboard that tells landlords when something needs attention.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">18</div>
+        <div class="revenue-detail">
+          <h5>Market Intelligence Subscription <span class="phase-badge phase-3">Phase 3</span></h5>
+          <p>Data and analytics product for professional investors. Area analysis, yield data, market trends, deal flow statistics. Recurring revenue at scale.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education & Content -->
+    <div class="revenue-category">
+      <div class="revenue-category-header">
+        <h4>&#127891; Education & Content Revenue</h4>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">19</div>
+        <div class="revenue-detail">
+          <h5>Training Partnerships <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Partner with existing training companies (Wealth Dragons, PIN, Touchstone, Property CEO) as the "what happens next" referral. Their graduates become our clients. Revenue share or referral fee.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">20</div>
+        <div class="revenue-detail">
+          <h5>Workshops and Masterclasses <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Paid events on specific topics - EPC compliance strategies, tax-efficient property structures, introduction to modern letting strategies (R2R, SA, PLO). Could be online or in-person.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">21</div>
+        <div class="revenue-detail">
+          <h5>Community Membership <span class="phase-badge phase-3">Phase 3</span></h5>
+          <p>Lower-cost access to knowledge, Q&A sessions and the network. Think &pound;20-50/month. Builds audience and feeds the higher-value services.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Leverage -->
+    <div class="revenue-category">
+      <div class="revenue-category-header">
+        <h4>&#128279; Network Leverage</h4>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">22</div>
+        <div class="revenue-detail">
+          <h5>Bulk Purchasing Power <span class="phase-badge phase-2">Phase 2</span></h5>
+          <p>Negotiate group rates on surveys, legal work, insurance and refurbishment for the investor network. The saving is passed on (partly) - the rest is margin.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">23</div>
+        <div class="revenue-detail">
+          <h5>White-Label Deal Sourcing <span class="phase-badge phase-3">Phase 3</span></h5>
+          <p>Provide sourced and packaged deals to other networks or training companies under their brand. Scales deal volume without needing to find every end buyer directly.</p>
+        </div>
+      </div>
+
+      <div class="revenue-item">
+        <div class="revenue-num">24</div>
+        <div class="revenue-detail">
+          <h5>Regional Licensing / Franchise <span class="phase-badge phase-3">Phase 3</span></h5>
+          <p>Once the model is proven, license the methodology, AI tools and network framework to operators in other regions. This is the big scale play.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <p><strong>24 potential revenue streams.</strong> Not all active from day one. The Phase 1 streams (sourcing fees, referral commissions, consultancy, SA management, social housing introductions) can generate revenue immediately with minimal setup. Phase 2 builds as the network grows. Phase 3 is the long-term vision once the model is proven and the reputation is established.</p>
+    </div>
+  </div>
+
+  <!-- TAB: KEY QUESTIONS -->
+  <div id="questions" class="tab-content">
+    <h2>Key Questions for Friday</h2>
+    <p class="section-subtitle">These are the things we need to discuss and start making decisions on. Some I have a view on, some I need your input. Click each question to see the context.</p>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>1. What's the business structure?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>New limited company? Partnership? How does Rital's existing SA company fit in - separate entity that feeds into the network, or part of the same business? How does Adam's equity stake work - shareholder in the new company, or a different arrangement? These decisions affect tax, liability, future investment and how profits flow. Worth having an accountant's view before finalising.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>2. Who does what?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>The working assumption is Rital operates the business day-to-day and Adam provides strategy, AI capability and network connections. But the detail matters. Who handles client relationships? Who manages the professional network? Who does the deal analysis? Who makes pricing decisions? Getting clear on roles early prevents confusion later. This doesn't need to be rigid - it needs to be honest.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>3. What's the compliance position on investor matching and private finance?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>If the business is matching investors with deals or raising private finance, FCA authorisation may be required depending on how it's structured. There are exemptions (introducing to authorised persons, certain professional investor categories) but this needs proper legal advice before launching. The approach should be: start with activities that don't require FCA authorisation, bring in FCA-approved individuals as the business grows, and build towards full authorisation over time. Compliance first, always.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>4. How do we build the network?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>The network is the competitive advantage - but it starts empty. What contacts does Rital already have from her SA business? What does Adam bring from his property background? Who are the first solicitors, brokers and surveyors we approach? Is there a vetting process for network members? How do we incentivise them to work with us? The network strategy is probably the most important operational decision we make early on.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>5. What's the brand and market positioning?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>"Rital & Adam Dragons" is a working title. What's the actual brand? The name should communicate trust, professionalism and property expertise without being generic. The tone matters too - are we the friendly neighbourhood property advisor, or the slick data-driven operation? The answer probably depends on who we're talking to. Landlords need warmth and trust. Investors need credibility and deal quality. The brand has to work for both.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>6. What launches first?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>With 24 potential revenue streams and a big vision, the question is: what do we actually do in month one? My recommendation would be to start with the advisory (portfolio health checks and strategy consultancy) plus Rital's existing SA management as the first network node. These require the least setup and start generating revenue and case studies immediately. The AI sourcing tools and investor matching build in parallel. But this is a conversation - Rital may have a different view on where the quickest wins are.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>7. What's the ethical framework for probate sourcing?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>We both agree this is a real opportunity handled with real care. Before implementing the probate sourcing AI, we need to define the rules: minimum waiting period after death before contact? Review process for every letter before it's sent? Opt-out mechanism? Tone and language standards? Legal review on GDPR compliance? This should be documented and non-negotiable. It protects families and it protects the brand.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>8. What does success look like in 12 months?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>This is probably the most useful question for Friday. If we fast-forward a year - what does the business look like? How many clients? How many deals? What revenue? How big is the network? What's the team? Having a shared picture of where we're heading makes every decision along the way easier. It doesn't need to be a detailed financial plan - it needs to be an honest conversation about ambition and expectations.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>9. What are the risks and how do we manage them?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>Every business has risks. The main ones here: regulatory changes that shift the market (already happening - but could accelerate), FCA compliance if we get the structure wrong, reputational risk from the probate approach, dependency on the network (if a key partner leaves), market downturn reducing deal volume, and the perennial startup risk of trying to do too much too soon. None of these are reasons not to do it. All of them are reasons to plan properly.</p>
+      </div>
+    </div>
+
+    <div class="question-card" onclick="this.classList.toggle('open')">
+      <div class="question-header">
+        <h4>10. How does Adam's investment work?</h4>
+        <span class="question-toggle">+</span>
+      </div>
+      <div class="question-body">
+        <p>Adam is bringing AI capability, strategic consultancy, network connections and capital. What does that translate to in equity terms? What's the vesting arrangement? What are the obligations on both sides? What happens if one party wants out? These conversations are always better to have early, when the relationship is strong and the stakes are low. A simple shareholder agreement drafted by a solicitor protects everyone.</p>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top: 32px;">
+      <p><strong>A note on how to use Friday:</strong> We don't need to answer all ten questions in one sitting. The most important ones to get aligned on are: what launches first (question 6), who does what (question 2) and what success looks like in 12 months (question 8). Everything else can follow once those foundations are set.</p>
+    </div>
+  </div>
+
+  <!-- TAB: SOURCES -->
+  <div id="sources" class="tab-content">
+    <h2>Sources</h2>
+    <p class="section-subtitle">Market data, statistics and regulatory information referenced throughout this document. All sources are publicly available and were accessed in April 2026.</p>
+
+    <h3>Landlord Market and Regulatory Changes</h3>
+    <div class="card" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>Landlord exodus data (93,000 in 2025; 110,000 forecast 2026):</strong> HomeniCom UK Rental Market Report 2025; LandlordBuyer 2026 forecast via Business London Press; ZNewsService property analysis</p>
+      <p><strong>Section 21 abolition (1 May 2026):</strong> Connaught Law - Section 21 Abolition UK Complete Legal Guide; EPC Guide - Section 21 & EPC Changes for Landlords</p>
+      <p><strong>EPC Band C deadline (October 2030) and retrofit costs:</strong> Landlord Studio - The Landlord's Guide to EPC Regulations 2025; LendinVest - 2026 UK Property Development Market</p>
+      <p><strong>Tax changes (April 2027, +2 percentage points):</strong> Landlord Zone - Landlords Under Pressure 2025; Mortgage Finance Gazette - UK Landlord Portfolio Trends</p>
+      <p><strong>Making Tax Digital requirements:</strong> HMRC official guidance; Landlord Zone analysis 2025</p>
+    </div>
+
+    <h3>Property Investment Market</h3>
+    <div class="card" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>UK property transactions forecast (1.18 million in 2026):</strong> Quartico - UK Property Yield Growth Outlook 2026</p>
+      <p><strong>Rental yield data (national averages, record 6.6%):</strong> London Property - UK Property Market 2026 Reset; Select Property - UK Real Estate Investment Trends</p>
+      <p><strong>BTL limited company registrations (400,000+):</strong> Mortgage Finance Gazette; UK Property Market statistical reports</p>
+      <p><strong>Property sourcing fees (1-5%, &pound;2,000-&pound;6,000):</strong> PropSourcer - Property Sourcing Fees Comprehensive Guide; Property Beacon - Sourcing Fees Guide</p>
+    </div>
+
+    <h3>Training Companies</h3>
+    <div class="card" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>Wealth Dragons:</strong> wealthdragons.co.uk; Wealth Dragons Bootcamp; Wiley Publishing - Property Entrepreneur</p>
+      <p><strong>Property Investor Network (PIN):</strong> propertyinvestorsnetwork.co.uk - Meetings, Membership and Services</p>
+      <p><strong>Touchstone Education:</strong> touchstoneeducation.com - Courses and About pages</p>
+      <p><strong>Property CEO:</strong> propertyceo.co.uk - Courses and About pages</p>
+      <p><strong>Education-to-execution gap analysis:</strong> Real Estate Skills - Real Estate Investing Courses review; PropSourcer industry analysis</p>
+    </div>
+
+    <h3>Deal Sourcing Platforms and Tools</h3>
+    <div class="card" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>SiteFindr (fees, model, 2012 founding):</strong> sitefindr.co.uk - FAQ, fees and sourcer information pages</p>
+      <p><strong>PropertyData, PropertyEngine, Realyse, PropMarker:</strong> PropSourcer - Top 4 Deal Sourcing Tools; PropSourcer - 6 Must-Have Sourcing Software Tools</p>
+      <p><strong>The Property Sourcing Company (app launch Feb 2026):</strong> Property Investor Today - App for Investors Launched</p>
+      <p><strong>BMV deal sourcing market evolution:</strong> Vocal Media - Why UK Property Deal Sourcing Is Evolving; Best BMV Deals - What Is BMV Property Deal Guide</p>
+    </div>
+
+    <h3>AI in Property</h3>
+    <div class="card" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>AI adoption forecasts (sub-10% to 70% by 2030):</strong> NRLA - AI and the Future of UK Property Investing</p>
+      <p><strong>AI valuation and due diligence tools:</strong> Realyse - Revolutionizing Residential Real Estate Due Diligence with AI; University of Manchester - AI System Transforming Property Valuations</p>
+      <p><strong>78% of UK property developers investing in AI:</strong> Lendlord - How AI Is Transforming Property Investment</p>
+      <p><strong>PropMarker AI sourcing, Built AI portfolio management:</strong> propmarker.co.uk; builtai.co</p>
+    </div>
+
+    <h3>Regulatory and Compliance</h3>
+    <div class="card" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>FCA authorisation requirements for investment activities:</strong> Financial Conduct Authority - The Perimeter Guidance Manual (PERG)</p>
+      <p><strong>Companies House data and API access:</strong> Companies House official service and developer documentation</p>
+      <p><strong>Land Registry data access:</strong> HM Land Registry - official data services</p>
+      <p><strong>Probate Registry public records:</strong> HM Courts and Tribunals Service - probate records search</p>
+      <p><strong>GDPR considerations for data cross-referencing:</strong> ICO guidance on legitimate interests and data processing</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Axiom AI Insights</div>
+  <p>&copy; 2026 Axiom AI Group. All rights reserved.</p>
+  <p style="margin-top: 8px; color: #AAB5C5;">This document was prepared by Axiom AI Insights for discussion purposes. It represents an initial view based on market research and strategic analysis conducted in April 2026. All sources are listed in the Sources tab.</p>
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      // Scroll so the content starts right below the sticky header
+      const header = document.querySelector('.header');
+      const mainEl = document.querySelector('.main');
+      const headerHeight = header.offsetHeight;
+      const mainTop = mainEl.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: mainTop - headerHeight, behavior: 'instant' });
+    });
+  });
+</script>
+
+</body>
+</html>
